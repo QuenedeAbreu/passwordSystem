@@ -1,0 +1,27 @@
+version: "3"
+services:
+  appnode:
+    build:
+      dockerfile: ./.docker/nodejs/node
+    container_name: "nodejs"
+    ports:
+      - 3000:3000
+    volumes:
+      - .:/usr/app
+    restart: always
+    depends_on:
+      - mysqldb
+  mysqldb:
+    image: mysql:8
+    container_name: "mysql-srv"
+    volumes:
+      - mysqldb:/var/lib/mysql
+    ports:
+      - 3308:3306
+    environment:
+      MYSQL_USER: quenede
+      MYSQL_PASSWORD: "@Quenede1393"
+      MYSQL_ROOT_PASSWORD: "@Quenede1393"
+    restart: always
+volumes:
+  mysqldb:
