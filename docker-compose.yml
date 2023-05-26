@@ -1,16 +1,5 @@
 version: "3"
 services:
-  appnode:
-    build:
-      dockerfile: ./.docker/nodejs/node
-    container_name: "nodejs"
-    ports:
-      - 3000:3000
-    volumes:
-      - .:/usr/app
-    restart: always
-    depends_on:
-      - mysqldb
   mysqldb:
     image: mysql:8
     container_name: "mysql-srv"
@@ -23,5 +12,25 @@ services:
       MYSQL_PASSWORD: "@Quenede1393"
       MYSQL_ROOT_PASSWORD: "@Quenede1393"
     restart: always
+    networks:
+      - my-network
+
+  appnode:
+    build:
+      dockerfile: ./.docker/nodejs/node
+    container_name: "nodejs"
+    #network_mode: host
+    networks:
+      - my-network
+    ports:
+      - 3000:3000
+    volumes:
+      - .:/usr/app
+    restart: always
+    depends_on:
+      - mysqldb
 volumes:
   mysqldb:
+networks:
+  my-network:
+    driver: bridge
