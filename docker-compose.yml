@@ -14,7 +14,6 @@ services:
     restart: always
     networks:
       - my-network
-
   appnode:
     build:
       dockerfile: ./.docker/nodejs/node
@@ -26,6 +25,8 @@ services:
       - 3000:3000
     volumes:
       - .:/usr/app
+    env_file:
+      - ./.env
     restart: always
     depends_on:
       - mysqldb

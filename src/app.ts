@@ -1,5 +1,6 @@
-import  express,{Request, Response}  from "express";
-import {sequelize} from './db/myql';
+import  express from "express";
+import {sequelize} from './db/mysql';
+import router from './router';
 const app = express();
 
 sequelize.authenticate().then(() => {
@@ -8,8 +9,6 @@ sequelize.authenticate().then(() => {
   console.log('Erro ao conectar com o banco de dados: ', err);
 })
 
-app.get('/', (req: Request, res: Response) => {
-  res.send('Olá mundo!');
-});
+app.use('/api',router);
 
 export default app;
