@@ -3,7 +3,7 @@ import { Model, DataTypes } from 'sequelize';
 import {sequelize} from '../db/mysql';
 
 export interface IUser extends Model {
-  id: BigInteger;
+  id_user: string;
   name: string;
   username: string;
   email: string;
@@ -15,11 +15,11 @@ export interface IUser extends Model {
 }
 
 export const User = sequelize.define<IUser>('users', {
-  id: {
-    type: DataTypes.BIGINT,
+  id_user: {
+    type: DataTypes.UUIDV4,
     allowNull: false,
     primaryKey: true,
-    autoIncrement: true,
+    unique:true
   },
   name: {
     type: DataTypes.STRING,
