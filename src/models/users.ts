@@ -19,6 +19,7 @@ export const User = sequelize.define<IUser>('users', {
     type: DataTypes.UUIDV4,
     allowNull: false,
     primaryKey: true,
+    defaultValue: DataTypes.UUIDV4,
     unique:true
   },
   name: {
