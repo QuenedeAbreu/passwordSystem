@@ -2,18 +2,18 @@
 
 import { Model, DataTypes } from 'sequelize';
 import {sequelize} from '../db/mysql';
-import {Permissions} from './permissions';
+import {User} from './users';
 import {Perfis} from './perfis';
 
-export interface IPermission_perfil extends Model {
+export interface IPerfil_user extends Model {
   id_permission_perfil: string;
   data_cadastro: Date;
   id_permission:string;
   id_perfil:string;
 }
 
-export const Permission_perfil = sequelize.define<IPermission_perfil>('permission_perfil', {
-    id_permission_perfil: {
+export const Perfil_user = sequelize.define<IPerfil_user>('perfil_user', {
+    id_perfil_user: {
       type: DataTypes.UUIDV4,
       primaryKey: true,
       allowNull: false,
@@ -22,21 +22,21 @@ export const Permission_perfil = sequelize.define<IPermission_perfil>('permissio
        unique: true
     }   
 }, {
-  tableName: 'permission_perfil',
+  tableName: 'perfil_user',
   timestamps: true
 });
 
-Permissions.belongsToMany(Perfis,{
+User.belongsToMany(Perfis,{
   through:{
-    model:Permission_perfil
+    model:Perfil_user
   },
-  foreignKey:'id_permission',
+  foreignKey:'id_user',
   constraints:true
 });
 
-Perfis.belongsToMany(Permissions,{
+Perfis.belongsToMany(User,{
   through:{
-    model:Permission_perfil
+    model:Perfil_user
   },
   foreignKey:'id_perfil',
   constraints:true
