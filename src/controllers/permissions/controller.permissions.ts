@@ -9,7 +9,7 @@ export const getAllPermissions = async (req:Request,res:Response)   =>{
     
   } catch (error) {
     console.log(error);
-    res.status(500).json({msg:'Erro ao listar permissães! - ',error});
+    res.status(500).json({msg:'Erro ao listar permissões! - ',error});
 }}
 
 export const createPermission = async (req:Request,res:Response)   =>{
