@@ -4,9 +4,9 @@ import { Model, DataTypes } from 'sequelize';
 import {sequelize} from '../db/mysql';
 
 export interface IPerfis extends Model {
-  id_permission: string;
-  permission_name: string;
-  status_permission: boolean;
+  id_perfil: string;
+  perfil_name: string;
+  status_perfil: boolean;
 }
 
 export const Perfis = sequelize.define<IPerfis>('perfis', {
@@ -22,7 +22,7 @@ export const Perfis = sequelize.define<IPerfis>('perfis', {
       type: DataTypes.STRING,
       allowNull: false
       },
-    status_permission:{
+      status_perfil:{
       type: DataTypes.BOOLEAN,
       allowNull: false,
       defaultValue: true
